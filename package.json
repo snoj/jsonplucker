@@ -1,6 +1,6 @@
 {
   "name": "jsonplucker",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Pluck info from a json string using it's coordinates",
   "main": "index.js",
   "scripts": {
@@ -24,7 +24,8 @@
   },
   "homepage": "https://github.com/snoj/jsonplucker#readme",
   "dependencies": {
-    "lodash": "^4.11.1"
+    "lodash": "^4.11.1",
+    "lodash-flatkeystree": "^1.0.0"
   },
   "bin": {
     "jsonplucker": "./jsonplucker"

@@ -11,9 +11,11 @@ Simply a wrapper for [lodash's at()](https://lodash.com/docs#at) function to mak
     }
 }
 ```
+
 Bash
 ```
-user@localhost:~$ cat someJsonFile.json | jsonplucker onething anotherthing.1
+user@localhost:~$ cat someJsonFile.json | jsonplucker onething anotherthing.1 "/you/"
 onething 1
 anotherthing.1 2
+anotherthing.you've got coming
 ```
