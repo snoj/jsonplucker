@@ -24,7 +24,8 @@
   },
   "homepage": "https://github.com/snoj/jsonplucker#readme",
   "dependencies": {
-    "lodash": "^4.11.1",
+    "commander": "^3.0.2",
+    "lodash": "^4.17.15",
     "lodash-flatkeystree": "^1.0.0"
   },
   "bin": {
