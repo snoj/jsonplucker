@@ -4,9 +4,15 @@ const commander = require('commander'),
 
 _.mixin(require('lodash-flatkeystree'));
 
+
+let cb = function(key, values) {
+  console.log.apply(null, [key, values].slice(!!opts.P));
+}
+
 const opts = commander.version('0.3.0')
   .option('-i, --input <jsonfile>', 'JSON file input')
   .option('-p', 'Don\'t print json keys', false)
+  .option('-t <jsfile>', 'js script to transform results.', 'asuperuniquestringforthisapplication-94861914870-68547218761')
   .parse(process.argv);
 
 function tryjson(teststring) {
@@ -17,7 +23,7 @@ function tryjson(teststring) {
   }
 };
 
-function parse(json, paths) {
+function parse(json, paths, cb) {
   if(!!!json) {
     console.error(json);
     throw "Invalid json";
@@ -40,24 +46,28 @@ function parse(json, paths) {
 
   let values = _.at(json, keys);
   _.each(values, function(v, index) {
-    console.log.apply(null, [paths[index], v].slice(!!opts.P));
+    cb(paths[index], v);
   });
   let keytree = _.keysDeep(json);
   _.each(rkeys, function(rk) {
     _.each(keytree, function(k) {
       if(rk.test(k)) {
-        console.log.apply(null, [k, _.get(json, k)].slice(!!opts.P));
+        cb(k, _.get(json, k));
       }
     });
   });
 }
 
+if(opts.T != 'asuperuniquestringforthisapplication-94861914870-68547218761') {
+  cb = require(opts.T);
+}
+
 (async function() {
   if(opts.input) {
-    parse(JSON.parse(fs.readFileSync(opts.input)), opts.args);
+    parse(JSON.parse(fs.readFileSync(opts.input)), opts.args, cb);
     return;
   } else {
     let stdinBuffer = fs.readFileSync(0);
-    parse(JSON.parse(stdinBuffer.toString()), opts.args);
+    parse(JSON.parse(stdinBuffer.toString()), opts.args, cb);
   }
 })();
